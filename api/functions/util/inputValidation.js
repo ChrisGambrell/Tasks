@@ -24,5 +24,8 @@ exports.signUpValidation = (req) => {
 		body('password')
 			.isLength({ min: 5 })
 			.withMessage('Password must have at least 5 characters'),
+		body('confirmPassword')
+			.notEmpty()
+			.withMessage('Confirm password must not be empty'),
 	]
 }

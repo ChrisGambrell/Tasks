@@ -17,7 +17,7 @@ module.exports = (req, res) => {
 			return userCreds.user.getIdToken()
 		})
 		.then((idToken) => {
-			return res.status.json({ token: idToken })
+			return res.json({ token: idToken })
 		})
 		.catch((error) => {
 			console.error(error)

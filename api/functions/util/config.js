@@ -12,4 +12,5 @@ const config = {
 const firebase = require('firebase')
 firebase.default.initializeApp(config)
 
+exports.db = firebase.default.firestore()
 exports.firebase = firebase.default
