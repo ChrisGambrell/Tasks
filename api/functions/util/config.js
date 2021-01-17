@@ -9,8 +9,12 @@ const config = {
 	measurementId: 'G-1MX8CFLDN4',
 }
 
+const admin = require('firebase-admin')
+admin.initializeApp(config)
+
 const firebase = require('firebase')
 firebase.default.initializeApp(config)
 
+exports.admin = admin
 exports.db = firebase.default.firestore()
 exports.firebase = firebase.default
