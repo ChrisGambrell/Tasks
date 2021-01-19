@@ -11,7 +11,7 @@ exports.loginValidation = () => {
 	]
 }
 
-exports.signUpValidation = (req) => {
+exports.signUpValidation = () => {
 	return [
 		body('displayName')
 			.notEmpty()
@@ -27,5 +27,13 @@ exports.signUpValidation = (req) => {
 		body('confirmPassword')
 			.notEmpty()
 			.withMessage('Confirm password must not be empty'),
+	]
+}
+
+exports.updateUserValidation = () => {
+	return [
+		body('displayName')
+			.notEmpty()
+			.withMessage('Display name most not be empty'),
 	]
 }
