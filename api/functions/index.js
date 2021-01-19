@@ -4,10 +4,18 @@ const authenticate = require('./util/authenticate')
 const { loginValidation, signUpValidation } = require('./util/inputValidation')
 const app = express()
 
-const { getUser, loginUser, signUpUser } = require('./routes/user')
+const {
+	getMe,
+	getUser,
+	getUsers,
+	loginUser,
+	signUpUser,
+} = require('./routes/user')
 app.post('/login', loginValidation(), loginUser)
+app.get('/me', authenticate, getMe)
 app.post('/signup', signUpValidation(), signUpUser)
-app.get('/user', authenticate, getUser)
-// app.get('/user/:uid', getUser)   // not ready yet
+app.get('/user', getUser)
+app.get('/user/:uid', getUser)
+app.get('/users', getUsers)
 
 exports.api = functions.https.onRequest(app)

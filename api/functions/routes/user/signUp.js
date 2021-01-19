@@ -21,8 +21,8 @@ module.exports = (req, res) => {
 	db.collection('users')
 		.where('displayName', '==', req.body.displayName)
 		.get()
-		.then((snapshot) => {
-			if (!snapshot.empty) {
+		.then((snap) => {
+			if (!snap.empty) {
 				return res.status(403).json({
 					code: 'auth/displayName-already-taken',
 					message: 'Display name chosen is already in use',
