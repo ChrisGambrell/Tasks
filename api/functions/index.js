@@ -1,12 +1,12 @@
 const express = require('express')
 const functions = require('firebase-functions')
 const authenticate = require('./util/authenticate')
-const {
-	loginValidation,
-	signUpValidation,
-	updateUserValidation,
-} = require('./util/inputValidation')
 const app = express()
+
+const { addTask, getTasks } = require('./routes/tasks')
+const { addTaskValidation } = require('./util/validations/taskValidations')
+app.get('/tasks', authenticate, getTasks)
+app.post('/tasks', authenticate, addTaskValidation(), addTask)
 
 const {
 	getMe,
@@ -16,6 +16,11 @@ const {
 	signUpUser,
 	updateUser,
 } = require('./routes/user')
+const {
+	loginValidation,
+	signUpValidation,
+	updateUserValidation,
+} = require('./util/validations/userValidations')
 app.post('/login', loginValidation(), loginUser)
 app.get('/me', authenticate, getMe)
 app.post('/signup', signUpValidation(), signUpUser)
