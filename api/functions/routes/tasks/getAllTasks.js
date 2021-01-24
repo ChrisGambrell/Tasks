@@ -1,14 +1,12 @@
 const { db } = require('../../util/config')
 
 module.exports = (req, res) => {
-	db.collection('users')
-		.orderBy('displayName')
+	db.collection('tasks')
+		.orderBy('createdAt')
 		.get()
 		.then((snap) => {
-			var users = []
-			users = snap.docs.map((doc) => ({ id: doc.id, ...doc.data() }))
-
-			return res.json(users)
+			var tasks = snap.docs.map((doc) => ({ id: doc.id, ...doc.data() }))
+			return res.json(tasks)
 		})
 		.catch((error) => {
 			console.error(error)

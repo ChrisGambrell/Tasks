@@ -26,6 +26,7 @@ module.exports = (req, res) => {
 	} else if (req.query.displayName) {
 		db.collection('users')
 			.where('displayName', '>=', req.query.displayName)
+			.orderBy('displayName')
 			.where(
 				'displayName',
 				'<',
