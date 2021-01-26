@@ -3,8 +3,17 @@ const functions = require('firebase-functions')
 const authenticate = require('./util/authenticate')
 const app = express()
 
-const { addTask, getAllTasks, getTask, getTasks } = require('./routes/tasks')
-const { addTaskValidation } = require('./util/validations/taskValidations')
+const {
+	addTask,
+	getAllTasks,
+	getTask,
+	getTasks,
+	updateTask,
+} = require('./routes/tasks')
+const {
+	addTaskValidation,
+	updateTaskValidation,
+} = require('./util/validations/taskValidations')
 // get tasks should have multiple events
 // 1. get authenticated user's tasks ✔️
 // 2. get ALL tasks ✔️
@@ -13,6 +22,7 @@ app.get('/', getAllTasks)
 app.get('/tasks', authenticate, getTasks)
 app.post('/tasks', authenticate, addTaskValidation(), addTask)
 app.get('/tasks/:taskId', getTask)
+app.patch('/tasks/:taskId', authenticate, updateTaskValidation(), updateTask)
 
 const {
 	getMe,
