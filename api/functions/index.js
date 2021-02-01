@@ -5,6 +5,7 @@ const app = express()
 
 const {
 	addTask,
+	deleteTask,
 	getAllTasks,
 	getTask,
 	getTasks,
@@ -18,6 +19,7 @@ app.get('/', getAllTasks)
 app.get('/tasks', authenticate, getTasks)
 app.post('/tasks', authenticate, addTaskValidation(), addTask)
 app.get('/tasks/:taskId', getTask)
+app.delete('/tasks/:taskId', authenticate, deleteTask)
 app.patch('/tasks/:taskId', authenticate, updateTaskValidation(), updateTask)
 
 const {
