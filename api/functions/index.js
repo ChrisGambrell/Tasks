@@ -14,10 +14,6 @@ const {
 	addTaskValidation,
 	updateTaskValidation,
 } = require('./util/validations/taskValidations')
-// get tasks should have multiple events
-// 1. get authenticated user's tasks ✔️
-// 2. get ALL tasks ✔️
-// 3. get tasks of a specific user
 app.get('/', getAllTasks)
 app.get('/tasks', authenticate, getTasks)
 app.post('/tasks', authenticate, addTaskValidation(), addTask)
@@ -27,6 +23,7 @@ app.patch('/tasks/:taskId', authenticate, updateTaskValidation(), updateTask)
 const {
 	getMe,
 	getUser,
+	getUserTasks,
 	getUsers,
 	loginUser,
 	signUpUser,
@@ -43,6 +40,7 @@ app.post('/signup', signUpValidation(), signUpUser)
 app.get('/user', getUser)
 app.patch('/user', authenticate, updateUserValidation(), updateUser)
 app.get('/user/:uid', getUser)
+app.get('/user/:uid/tasks', getUserTasks)
 app.get('/users', getUsers)
 
 exports.api = functions.https.onRequest(app)
